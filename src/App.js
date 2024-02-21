@@ -1,11 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { useState } from "react";
+import Modal from "./Modal";
 import { ReactComponent as HeaderYoutubeIcon } from "../src/assets/youtubeIcon.svg";
 import { ReactComponent as HeaderProfile } from "../src/assets/profile.svg";
 import { ReactComponent as NavAddCircle } from "../src/assets/addCircle.svg";
 import { ReactComponent as NavFolder } from "../src/assets/folder.svg";
 
 const App = () => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const openModalHandler = () => setIsOpenModal(!isOpenModal);
+
   return (
     <AppLayout>
       <Header>
@@ -22,7 +28,8 @@ const App = () => {
       <Main>
         <Navigation>
           <NavList>
-            <NavItem>
+            <NavItem onClick={openModalHandler}>
+              {isOpenModal ? <Modal /> : null}
               <NavAddCircle />
               <NavItemLabel>카테고리 추가</NavItemLabel>
             </NavItem>
