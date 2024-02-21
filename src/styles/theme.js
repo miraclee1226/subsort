@@ -13,8 +13,8 @@ const fontWeights = {
 
 const colors = {
   lightGray: "#e5e5e5",
-  skyBlue: "#87CEEB",
-};
+  skyBlue: "#4ABECA",
+  };
 
 const theme = {
   fontSizes,
