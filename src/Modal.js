@@ -1,11 +1,13 @@
 import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
+import NewModal from "./NewModal";
 import { ReactComponent as Close } from "../src/assets/close.svg";
 
 const Modal = ({ setIsOpenModal }) => {
-  const closeModalHandler = () => {
-    setIsOpenModal(false);
-  };
+  const [isOpenNewModal, setIsOpenNewModal] = useState(false);
+  const openNewModal = () => setIsOpenNewModal(!isOpenNewModal);
+  const closeModalHandler = () => setIsOpenModal(false);
 
   return (
     <ModalBackDrop onClick={closeModalHandler}>
@@ -16,7 +18,8 @@ const Modal = ({ setIsOpenModal }) => {
         </Header>
         <TextInput type="text" placeholder="카테고리명을 작성하세요" />
         <Footer>
-          <FooterParagraph>저장</FooterParagraph>
+          <FooterParagraph onClick={openNewModal}>저장</FooterParagraph>
+          {isOpenNewModal && <NewModal setIsOpenNewModal={setIsOpenNewModal} />}
         </Footer>
       </ModalLayout>
     </ModalBackDrop>
@@ -52,8 +55,8 @@ const ModalLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 260px;
-  height: 260px;
+  width: 350px;
+  height: 350px;
   padding: 16px;
   text-align: center;
   background-color: rgb(255, 255, 255);
@@ -72,7 +75,7 @@ const HeaderParagraph = styled.p`
 `;
 
 const TextInput = styled.input`
-  width: 220px;
+  width: 310px;
   height: 30px;
   border-width: 0 0 2px;
   border-bottom: 2px solid #4abeca;
@@ -93,7 +96,6 @@ const Footer = styled.footer`
 
 const FooterParagraph = styled.button`
   font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.regular};
   color: ${({ theme }) => theme.colors.skyBlue};
   outline: none;
   border: none;
