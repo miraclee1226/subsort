@@ -29,7 +29,7 @@ const App = () => {
         <Navigation>
           <NavList>
             <NavItem onClick={openModalHandler}>
-              {isOpenModal ? <Modal /> : null}
+              {isOpenModal && <Modal setIsOpenModal={setIsOpenModal} />}
               <NavAddCircle />
               <NavItemLabel>카테고리 추가</NavItemLabel>
             </NavItem>

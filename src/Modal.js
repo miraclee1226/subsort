@@ -2,29 +2,53 @@ import React from "react";
 import styled from "styled-components";
 import { ReactComponent as Close } from "../src/assets/close.svg";
 
-const Modal = () => {
+const Modal = ({ setIsOpenModal }) => {
+  const closeModalHandler = () => {
+    setIsOpenModal(false);
+  };
+
   return (
-    <ModalLayout>
-      <Header>
-        <HeaderParagraph>새 카테고리 생성</HeaderParagraph>
-        <Close />
-      </Header>
-      <TextInput type="text" placeholder="카테고리명을 작성하세요" />
-      <Footer>
-        <FooterParagraph>저장</FooterParagraph>
-      </Footer>
-    </ModalLayout>
+    <ModalBackDrop onClick={closeModalHandler}>
+      <ModalLayout onClick={(e) => e.stopPropagation()}>
+        <Header>
+          <HeaderParagraph>새 카테고리 생성</HeaderParagraph>
+          <Close onClick={closeModalHandler} />
+        </Header>
+        <TextInput type="text" placeholder="카테고리명을 작성하세요" />
+        <Footer>
+          <FooterParagraph>저장</FooterParagraph>
+        </Footer>
+      </ModalLayout>
+    </ModalBackDrop>
   );
 };
 
 export default Modal;
 
-const ModalLayout = styled.div`
+const ModalBackDrop = styled.div`
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  animation: fadein 0.5s;
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
+const ModalLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
