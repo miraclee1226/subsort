@@ -19,7 +19,7 @@ const Modal = ({ setIsOpenModal }) => {
         <TextInput type="text" placeholder="카테고리명을 작성하세요" />
         <Footer>
           <FooterParagraph onClick={openNewModal}>저장</FooterParagraph>
-          {isOpenNewModal && <NewModal setIsOpenNewModal={setIsOpenNewModal} />}
+          {isOpenNewModal && <NewModal setIsOpenModal={setIsOpenModal} setIsOpenNewModal={setIsOpenNewModal} />}
         </Footer>
       </ModalLayout>
     </ModalBackDrop>
@@ -79,9 +79,11 @@ const TextInput = styled.input`
   height: 30px;
   border-width: 0 0 2px;
   border-bottom: 2px solid #4abeca;
+  font-size: ${({ theme }) => theme.fontSizes.md};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.skyBlue};
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
 
   &:focus {
